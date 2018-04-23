@@ -14,10 +14,6 @@ namespace App\Http\Controllers;
  * @author Krle-Desktop
  */
 class FrontController extends Controller {
-   
-    public function index(){
-        return view('index');
-    }
     
     
     

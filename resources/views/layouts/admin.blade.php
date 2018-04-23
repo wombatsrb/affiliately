@@ -1,0 +1,5 @@
+@include('components.back.head')
+    @include('components.back.header')
+        @yield('content')
+    @include('components.back.footer')
+@include('components.back.foot')
