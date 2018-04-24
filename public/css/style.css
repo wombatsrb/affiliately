@@ -855,8 +855,7 @@ span.prfil-img img,.activity-img img,.media>.pull-left img,.inbox-page img {
     padding: 1em;
     min-width: 190px;
     top: 122%;
-	left:unset;
-	right:0;
+    left:0%;
 }
 ul.dropdown-menu.drp-mnu li {
     list-style-type: none;
