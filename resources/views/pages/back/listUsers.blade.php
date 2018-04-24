@@ -34,7 +34,6 @@
                                                 <td><a href='#'>Delete</a></td>
 					</tr>
                                     @endforeach
-                                    <!-- comment -->
                                 </tbody>
 			</table>
 		</div>
