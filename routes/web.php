@@ -24,11 +24,13 @@ Route::group([ 'middleware' => 'user'], function() {
 
 Route::group([ 'middleware' => 'worker'], function() {
     Route::get('/admin/dashboard', 'AdminController@adminDashboard')->name('adminDashboard');
-
+        
     
 });
 
 Route::group([ 'middleware' => 'admin'], function() {
-    
+    Route::get('/admin/user/add', 'UsersController@addUserView')->name('addUserView');
+    Route::post('/admin/user/add', 'UsersController@addUser')->name('addUser');
+    Route::get('/admin/user/modify', 'UsersController@modifyUsersView')->name('modifyUsersView');
     
 });

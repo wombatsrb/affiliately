@@ -2,39 +2,7 @@
 
 
 			<div class="main-page login-page ">
-                                @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
-
-                                @if (session()->has('error'))
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                                <li>{{ session()->get('error') }}</li>
-                                        </ul>
-                                    </div>
-                                @endif                                
-
-                                @if (session()->has('success'))
-                                    <div class="alert alert-success">
-                                        <ul>
-                                                <li>{{ session()->get('success') }}</li>
-                                        </ul>
-                                    </div>
-                                @endif  
-
-                                @if(session()->has('user'))
-                                    <div class="alert alert-success">
-                                        <ul>
-                                                <li>{{ session()->get('user')->id_user }}</li>
-                                        </ul>
-                                    </div>
-                                @endif                                 
+                            @include('components.back.displayMessages')    
 				<h2 class="title1">Login</h2>
 				<div class="widget-shadow">
 					<div class="login-body">

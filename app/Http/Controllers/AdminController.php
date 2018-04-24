@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menus;
+use App\Models\Others;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use function abort;
@@ -22,24 +23,28 @@ use function view;
  */
 class AdminController extends Controller {
     
-    private $userInstance;
-    private $menuInstance;
-    
+    protected $userInstance;
+    protected $menuInstance;
+    protected $othersInstance;
     protected $data = array();
 
 
     public function __construct(){
         $this->userInstance = new Users();
         $this->menuInstance = new Menus();
+        $this->othersInstance = new Others();
         
         /* Getting Menu items for logged role */
         if(session()->has('user')){
             $menuItems = $this->menuInstance->getMenuListByRole(session()->get('user')->role_name);
             $this->data['menus'] = $menuItems;
-
-            
+                       
         }
         
+        /*getting roles for dropdown menu*/
+        $this->data['roles'] = $this->othersInstance->getRoles();
+        /*getting statuses for dropdown menu*/
+        $this->data['statuses'] = $this->othersInstance->getUsersStatuses();
     }
     
     
@@ -58,7 +63,6 @@ class AdminController extends Controller {
         }
 
     }
-    
     
     public function adminLogin(){
         return view('pages.back.login');

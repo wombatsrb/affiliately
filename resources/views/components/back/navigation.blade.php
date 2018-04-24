@@ -27,7 +27,7 @@
                                 <ul class="treeview-menu menu-open" style="display: block;">
                             @endif
                             @if($menu->id_menu == $menu2->menu_parent)
-                              <li><a href="{{$menu2->url}}"><i class="{{$menu2->menu_icon}}"></i> {{$menu2->menu_name}}</a></li>
+                              <li><a href="{{route($menu2->url)}}"><i class="{{$menu2->menu_icon}}"></i> {{$menu2->menu_name}}</a></li>
                             @endif
                             @if($loop->last)
                                 </ul>
