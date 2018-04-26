@@ -30,8 +30,16 @@ class Others {
         return $result;
                 
     }
+    public function getServiceTypes(){
+        $result = DB::table('services_types')
+                ->get();
+        return $result;      
+    }
     
-    
-    
+    public function getCategories(){
+        $result = DB::table('services_categories')
+                ->get();
+        return $result;      
+    }
     
 }
