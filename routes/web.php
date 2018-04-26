@@ -36,4 +36,11 @@ Route::group([ 'middleware' => 'admin'], function() {
     Route::post('/admin/user/modify/{id}', 'UsersController@editUser')->name('editUser');
     Route::get('/admin/user/delete/{id}', 'UsersController@deleteUser')->name('deleteUser');
     
+    
+    Route::get('/admin/menu', 'MenusController@viewMenu')->name('viewMenu');
+    Route::post('/admin/menu/add', 'MenusController@addMenu')->name('addMenu');
+    Route::get('/admin/menu/delete/{id}', 'MenusController@deleteMenu')->name('deleteMenu');
+    Route::get('/admin/menu/edit/{id}', 'MenusController@singleMenuView')->name('singleMenuView');
+    Route::post('/admin/menu/edit/{id}', 'MenusController@editMenu')->name('editMenu');
+    
 });
