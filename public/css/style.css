@@ -8472,3 +8472,7 @@ h4.asd label {
 .widget-shadow{
     border-bottom: 2px solid #DBDBDB;
 }
+
+.alert ul{
+    list-style-type:none;
+}

@@ -154,8 +154,8 @@ class Users {
                     'password'  => md5($this->password),
                     'username'  => $this->username,
                     'role_id'  => $this->role_id,
-                    'user_status_id'  => $this->user_status_id
-                    
+                    'user_status_id'  => $this->user_status_id,
+                    'date_of_registration' => date("Y-m-d H:i:s")
                 ]);
         return $result;
     }
@@ -167,4 +167,59 @@ class Users {
         
         return $result;
     }
+    
+    public function getUserById($id){
+        $result = DB::table('users')
+                ->join('roles', 'role_id','=', 'id_role')
+                ->join('users_statuses', 'user_status_id', '=', 'id_user_status')
+                ->where('id_user', '=', $id)
+                ->first();
+        
+        return $result;
+    }
+    
+    public function editUserById($id){
+        $result = DB::table('users')
+                ->where('id_user', '=', $id)
+                ->update([
+                    'name'  => $this->name,
+                    'surname'  => $this->surname,
+                    'email'  => $this->email,
+                    'address1'  => $this->address1,
+                    'address2'  => $this->address2,
+                    'city'  => $this->city,
+                    'country'  => $this->country,
+                    'zip'  => $this->zip,
+                    'username'  => $this->username,
+                    'role_id'  => $this->role_id,
+                    'user_status_id'  => $this->user_status_id,
+                    'date_of_update' => date("Y-m-d H:i:s")
+                ]);
+        
+        return $result;
+    }
+    
+    public function deleteUser($id){
+        
+        $getDeleteStatusId = DB::table('users_statuses')
+                            ->where('status_name', '=', 'Deleted')
+                            ->select('id_user_status')
+                            ->first()
+                            ->id_user_status;
+        
+        $result = DB::table('users')
+                ->where('id_user', '=', $id)
+                ->update([
+                    'user_status_id' => $getDeleteStatusId
+                ]);
+        
+        return $result;
+    }
+    
+    
+    
+    
+    
+    
+    
 }

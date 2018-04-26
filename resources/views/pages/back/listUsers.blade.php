@@ -1,11 +1,12 @@
 @extends('layouts.admin')
 
 @section('content')
+@include('components.back.displayMessages')
 <div class="main-page">
 	<div class="tables">
 
 		<div class="bs-example widget-shadow" data-example-id="hoverable-table">
-			<h4>Hover Rows Table:</h4>
+			<h4>Users</h4>
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -30,8 +31,8 @@
                                                 <td>{{$user->email}}</td>
                                                 <td>{{$user->role_name}}</td>
                                                 <td>{{$user->status_name}}</td>
-                                                <td><a href='#'>Modify</a></td>
-                                                <td><a href='#'>Delete</a></td>
+                                                <td><a href='{{route('editUserView', ['id' => $user->id_user])}}'>Modify</a></td>
+                                                <td><a href='{{route('deleteUser', ['id' => $user->id_user])}}'>Delete</a></td>
 					</tr>
                                     @endforeach
                                 </tbody>

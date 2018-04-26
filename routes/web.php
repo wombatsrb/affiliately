@@ -32,5 +32,8 @@ Route::group([ 'middleware' => 'admin'], function() {
     Route::get('/admin/user/add', 'UsersController@addUserView')->name('addUserView');
     Route::post('/admin/user/add', 'UsersController@addUser')->name('addUser');
     Route::get('/admin/user/modify', 'UsersController@modifyUsersView')->name('modifyUsersView');
+    Route::get('/admin/user/modify/{id}', 'UsersController@editUserView')->name('editUserView');
+    Route::post('/admin/user/modify/{id}', 'UsersController@editUser')->name('editUser');
+    Route::get('/admin/user/delete/{id}', 'UsersController@deleteUser')->name('deleteUser');
     
 });
