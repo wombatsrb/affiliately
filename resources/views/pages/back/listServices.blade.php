@@ -3,6 +3,7 @@
 
 @section('content')
 @include('components.back.displayMessages')
+
 <div class="main-page">
 	<div class="tables">
 
