@@ -43,4 +43,14 @@ Route::group([ 'middleware' => 'admin'], function() {
     Route::get('/admin/menu/edit/{id}', 'MenusController@singleMenuView')->name('singleMenuView');
     Route::post('/admin/menu/edit/{id}', 'MenusController@editMenu')->name('editMenu');
     
+    
+    Route::get('/admin/service/add', 'ServicesController@addServiceView')->name('addServiceView');
+    Route::post('/admin/service/add', 'ServicesController@addService')->name('addService');
+    Route::get('/admin/service/modify', 'ServicesController@modifyServicesView')->name('modifyServiceView');
+    Route::get('/admin/service/modify/{id}', 'ServicesController@editServiceView')->name('editServiceView');
+    Route::post('/admin/service/modify/{id}', 'ServicesController@editService')->name('editService');
+    Route::get('/admin/service/delete/{id}', 'ServicesController@deleteService')->name('deleteService');
+    
+    
+    
 });

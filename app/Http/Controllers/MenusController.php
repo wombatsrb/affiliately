@@ -25,10 +25,10 @@ class MenusController extends AdminController
         
         $rules  = $request->validate([
             'menu_name' => 'required|min:3|max:20',
-            'priority' => 'required|numeric',
+            'menu_priority' => 'required|numeric',
             'url' => 'required|min:3|max:20',
-            'icon' => 'required|min:3|max:20',
-            'menu_parent' => 'numeric',
+            'menu_icon' => 'required|min:3|max:20',
+            'menu_parent' => 'nullable|numeric',
             'roles' => 'required|numeric'
         ]);
         

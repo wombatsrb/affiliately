@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use App\Models\Menus;
 use App\Models\Others;
 use App\Models\Users;
+use App\Models\Services;
 use Illuminate\Http\Request;
 use function abort;
 use function redirect;
@@ -33,6 +34,7 @@ class AdminController extends Controller {
         $this->userInstance = new Users();
         $this->menuInstance = new Menus();
         $this->othersInstance = new Others();
+        $this->serviceInstance = new Services();
         
         /* Getting Menu items for logged role */
         if(session()->has('user')){
@@ -45,6 +47,10 @@ class AdminController extends Controller {
         $this->data['roles'] = $this->othersInstance->getRoles();
         /*getting statuses for dropdown menu*/
         $this->data['statuses'] = $this->othersInstance->getUsersStatuses();
+        /*getting status types for dropdown menu*/
+        $this->data['types'] = $this->othersInstance->getServiceTypes();
+        /*getting categories types for dropdown menu*/
+        $this->data['categories'] = $this->othersInstance->getCategories();
     }
     
     

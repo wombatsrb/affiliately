@@ -32,7 +32,7 @@
                                                 <td>{{$user->role_name}}</td>
                                                 <td>{{$user->status_name}}</td>
                                                 <td><a href='{{route('editUserView', ['id' => $user->id_user])}}'>Modify</a></td>
-                                                <td><a href='{{route('deleteUser', ['id' => $user->id_user])}}'>Delete</a></td>
+                                                <td><a href='{{route('deleteUser', ['id' => $user->id_user])}}' onclick="return confirm('Are you sure?')">Delete</a></td>
 					</tr>
                                     @endforeach
                                 </tbody>
