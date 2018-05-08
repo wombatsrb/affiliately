@@ -50,7 +50,18 @@ Route::group([ 'middleware' => 'admin'], function() {
     Route::get('/admin/service/modify/{id}', 'ServicesController@editServiceView')->name('editServiceView');
     Route::post('/admin/service/modify/{id}', 'ServicesController@editService')->name('editService');
     Route::get('/admin/service/delete/{id}', 'ServicesController@deleteService')->name('deleteService');
-    
-    
-    
+
+    Route::get('/admin/orders', 'OrdersController@ordersView')->name('ordersView');
+    Route::get('/admin/order/{id}', 'OrdersController@orderView')->name('orderView');
+    Route::get('/admin/order/create', 'OrdersController@orderCreateView')->name('orderCreateView');
+    Route::post('/admin/order/create', 'OrdersController@orderCreate')->name('orderCreate');
+
+    Route::get('/admin/order/service/{id}', 'OrdersController@orderServiceView')->name('orderServiceView');
+    Route::post('/admin/order/service/charge', 'CreditsController@chargeServiceOrder')->name('chargeServiceOrder');
+    Route::post('/admin/order/service/status/{id}', 'OrdersController@orderServiceStatusUpdate')->name('orderServiceStatusUpdate');
+    Route::post('/admin/order/service/worker/{id}', 'OrdersController@orderServiceWorkerUpdate')->name('orderServiceWorkerUpdate');
+
+    Route::post('/order/service/message/{id}', 'OrdersController@orderServiceSendMessage')->name('orderServiceSendMessage');
+    Route::post('/admin/order/service/charge/history/{idOrderService}', 'CreditsController@getServiceChargeHistory')->name('getServiceChargeHistory');
+
 });

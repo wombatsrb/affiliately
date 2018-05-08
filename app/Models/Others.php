@@ -35,11 +35,15 @@ class Others {
                 ->get();
         return $result;      
     }
-    
     public function getCategories(){
         $result = DB::table('services_categories')
                 ->get();
         return $result;      
+    }
+    public function getOrderServiceStatuses(){
+        $result = DB::table('orders_services_statuses')
+                ->get();
+        return $result;
     }
     
 }

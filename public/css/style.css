@@ -851,6 +851,15 @@ span.prfil-img img,.activity-img img,.media>.pull-left img,.inbox-page img {
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
 }
+
+span.prfil-img img,.activity-img img,.media>.pull-right img,.inbox-page img {
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
 .profile_details ul li ul.dropdown-menu.drp-mnu {
     padding: 1em;
     min-width: 190px;
@@ -1267,7 +1276,7 @@ code {
 	margin-top:2em;
 }
 .media {
-  margin-top:45px !important;
+  margin-top:0px !important;
 }
 .media:first-child {
   margin-top: 0 !important;
@@ -2885,7 +2894,7 @@ hr {
     color: #5a5a5a;
 }
 .agileinfo-cdr small.lg-item-text {
-    font-size: 13px;
+    font-size: 15px;
 }
 .streamline .sl-primary{
     border-left-color: #ff4a43;
@@ -8475,4 +8484,15 @@ h4.asd label {
 
 .alert ul{
     list-style-type:none;
+}
+
+#messageBox2{
+
+}
+
+#messagesBox{
+    overflow: auto;
+    height:auto;
+    max-height: 800px;
+
 }

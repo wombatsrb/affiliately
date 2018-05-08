@@ -167,6 +167,19 @@ class Users {
         
         return $result;
     }
+
+    public function getAllWorkers(){
+        $result = DB::table('users')
+            ->join('roles', 'role_id','=', 'id_role')
+            ->join('users_statuses', 'user_status_id', '=', 'id_user_status')
+            ->where([
+                ['role_name', '=', 'Worker'],
+                ['status_name', '=', 'Active']
+            ])
+            ->get();
+
+        return $result;
+    }
     
     public function getUserById($id){
         $result = DB::table('users')
@@ -215,6 +228,8 @@ class Users {
         
         return $result;
     }
+
+
     
     
     

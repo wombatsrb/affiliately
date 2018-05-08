@@ -102,3 +102,7 @@
         margin-left: auto;
     }
 }
+
+#errorMessage, #successMessage{
+    display:none;
+}

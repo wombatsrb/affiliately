@@ -92,6 +92,7 @@ class Menus {
                 ->where('role_name', '=', 'Admin')
                 ->orWhere('role_name', '=', 'Worker')
                 ->groupBy('menu_id')
+                ->orderBy('menu_priority', 'asc')
                 ->get();          
      }
      else{
@@ -99,6 +100,7 @@ class Menus {
                 ->join('menus_roles', 'm.id_menu', '=', 'menu_id')
                 ->join('roles', 'role_id', '=', 'id_role')
                 ->where('role_name', '=', $role)
+                ->orderBy('menu_priority', 'asc')
                 ->get();         
      }
 
@@ -110,6 +112,7 @@ class Menus {
     public function getMenuNotParent(){
         $result = DB::table('menus')
                 ->where('menu_parent', '=', null)
+                ->orderBy('menu_priority', 'asc')
                 ->get();
         
         return $result;
