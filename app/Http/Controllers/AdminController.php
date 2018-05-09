@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menus;
+use App\Models\Orders;
 use App\Models\Others;
 use App\Models\Users;
 use App\Models\Services;
@@ -35,7 +36,8 @@ class AdminController extends Controller {
         $this->menuInstance = new Menus();
         $this->othersInstance = new Others();
         $this->serviceInstance = new Services();
-        
+        $this->orderInstance = new Orders();
+
         /* Getting Menu items for logged role */
         if(session()->has('user')){
             $menuItems = $this->menuInstance->getMenuListByRole(session()->get('user')->role_name);

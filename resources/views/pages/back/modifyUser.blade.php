@@ -96,9 +96,46 @@
                     <table class="table">
                         <h2>Orders History</h2>
                         <br>
-                        <div class="alert alert-warning" role="alert">
-                          There aren't any previous history records
-                        </div>
+                        @if($ordersData->isNotEmpty())
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date of Order</th>
+                                <th>Date of Update</th>
+                                <th>Order Status</th>
+                                <th>Payment Status</th>
+                                <th>Order Details</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($ordersData as $order)
+                                    <tr>
+                                        <th scope="row">{{$order->id_order}}</th>
+                                        <td>{{$order->date_of_order}}</td>
+                                        <td>{{$order->date_of_update}}</td>
+                                        <td>{{$order->order_status_name}}</td>
+                                        <td>
+                                            @if($order->payment_status==true)
+                                                Paid
+                                            @else
+                                                Unpaid
+                                            @endif
+                                        </td>
+                                        <td><a href='{{route('orderView', ['id' => $order->id_order])}}' ">View Details</a></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        @else
+                            <div class="alert alert-warning" role="alert">
+                                There aren't any previous history records
+                            </div>
+                        @endif
+
+
+
+
+
+
                     </table>
                 </div>
     </div>

@@ -68,16 +68,16 @@ class OrdersController extends AdminController
         }
 
     }
-    public function orderServiceSendMessage(Request $request, $id){
+    public function orderServiceSendMessage(Request $request, $id)
+    {
         $this->ordersInstance->setMessage($request->messageText);
         $this->ordersInstance->setUserId($request->userId);
 
         $result = $this->ordersInstance->sendMessageByOrderService($id);
 
-        if($result){
+        if ($result) {
             return "Message has been sent!";
-        }
-        else{
+        } else {
             return "There has been some problem with sending message!";
         }
 
