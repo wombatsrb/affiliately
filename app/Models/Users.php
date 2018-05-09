@@ -139,7 +139,6 @@ class Users {
         return $result;
 
     }
-    
     public function addUser(){
         $result = DB::table('users')
                 ->insert([
@@ -167,7 +166,6 @@ class Users {
         
         return $result;
     }
-
     public function getAllWorkers(){
         $result = DB::table('users')
             ->join('roles', 'role_id','=', 'id_role')
@@ -180,7 +178,6 @@ class Users {
 
         return $result;
     }
-    
     public function getUserById($id){
         $result = DB::table('users')
                 ->join('roles', 'role_id','=', 'id_role')
@@ -190,7 +187,6 @@ class Users {
         
         return $result;
     }
-    
     public function editUserById($id){
         $result = DB::table('users')
                 ->where('id_user', '=', $id)
@@ -211,7 +207,6 @@ class Users {
         
         return $result;
     }
-    
     public function deleteUser($id){
         
         $getDeleteStatusId = DB::table('users_statuses')

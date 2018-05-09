@@ -23,7 +23,6 @@ class Credits
     {
         $this->credit_amount = $credit_amount;
     }
-
     public function getTransactionDescription()
     {
         return $this->transaction_description;
@@ -42,6 +41,23 @@ class Credits
 
         return $result;
 
+    }
+
+    public function addUserCredit($id){
+        $currentCredits = DB::table('credits')
+            ->where('user_id', '=', $id)
+            ->first()
+            ->amount;
+
+        $newCredits = $currentCredits + $this->getCreditAmount();
+
+        $result = DB::table('credits')
+            ->where('user_id', '=', $id)
+            ->update([
+                'amount' => $newCredits
+            ]);
+
+        return $result;
     }
 
     public function chargeUser($id, $serviceOrderId){
@@ -83,6 +99,7 @@ class Credits
 
         return $result;
     }
+
 
 
 

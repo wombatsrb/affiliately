@@ -15,6 +15,9 @@ class CreditsController extends AdminController
         $this->creditsInstance = new Credits();
     }
 
+    public function addUserCredits(Request $request){
+
+    }
     public function chargeServiceOrder(Request $request)
     {
 

@@ -87,11 +87,33 @@
                 </table>
         </form>
         </div>
+        @if($userData->role_name=="User")
+            <div class="sign-up-row  widget-shadow form-group">
+                 <form class="form-horizontal">
+                    <h1>Add User Funds</h1>
+                    <div class="form-group">
+                        <label for="focusedinput" class="col-sm-4 control-label">Charge User</label>
+                        <div class="col-sm-4">
+                            <div class="text-danger">
+                                <input class="form-control1" type="number" id="charge_amount_input" min="0">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <a href="#" id="btn_charge_customer" class="btn btn-primary" role="button">Charge Customer</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="focusedinput" class="col-sm-4 control-label">Charge Description</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" placeholder="Enter detailed transaction details" id="transaction_details"></textarea>
+                        </div>
+                    </div>
+                 </form>
+            <div class="clearfix"></div>
+            </div>
+        @endif
     </div>
-    <div class="col-md-1">
-        
-    </div>
-    <div class="col-md-7">
+    <div class="col-md-8">
                 <div class="sign-up-row  widget-shadow form-group">
                     <table class="table">
                         <h2>Orders History</h2>

@@ -18,8 +18,6 @@ class UsersController extends AdminController
         $this->data['users']=$allUsersData;                
         return view('pages.back.listUsers', $this->data);
     }
-    
-    
     public function addUser(Request $request){
         
         $rules = $request->validate([
@@ -58,7 +56,6 @@ class UsersController extends AdminController
             return redirect()->back()->with('error', 'There has been some problem with adding user');
         }
     }
-    
     public function editUserView($id){
         
         $this->data['userData'] = $this->userInstance->getUserById($id);
@@ -67,7 +64,6 @@ class UsersController extends AdminController
         return view('pages.back.modifyUser', $this->data);
         
     }
-    
     public function editUser(Request $request, $id){
         
         $rules = $request->validate([
@@ -105,7 +101,6 @@ class UsersController extends AdminController
             return redirect()->back()->with('error', 'There has been some problem with editing user');
         }        
     }
-    
     public function deleteUser($id){
         
         $result = $this->userInstance->deleteUser($id);

@@ -62,10 +62,7 @@
                 </div>
 
         </div>
-        <div class="col-md-1">
-
-        </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
             <div class="sign-up-row  widget-shadow form-group col-md-12">
                     <h2>Ordered Services</h2>
                     <br>
@@ -75,38 +72,38 @@
                     <h3>Service {{$loop->iteration}}</h3><br>
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label for="focusedinput" class="col-sm-4 control-label">Service Name:</label>
-                            <div class="col-sm-8">
+                            <label for="focusedinput" class="col-sm-5 control-label">Service Name:</label>
+                            <div class="col-sm-7">
                                 {{$serviceData->service_name}}
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="focusedinput" class="col-sm-4 control-label">Service Category:</label>
-                            <div class="col-sm-8">
+                            <label for="focusedinput" class="col-sm-5 control-label">Service Category:</label>
+                            <div class="col-sm-7">
                                 {{$serviceData->service_category_name}}
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="focusedinput" class="col-sm-4 control-label">Quantity:</label>
-                            <div class="col-sm-8">
+                            <label for="focusedinput" class="col-sm-5 control-label">Quantity:</label>
+                            <div class="col-sm-7">
                                 {{$serviceData->quantity}}
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="focusedinput" class="col-sm-4 control-label">Ordered Service Status:</label>
-                            <div class="col-sm-8">
+                            <label for="focusedinput" class="col-sm-5 control-label">Ordered Service Status:</label>
+                            <div class="col-sm-7">
                                 {{$serviceData->order_service_status_name}}
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="focusedinput" class="col-sm-4 control-label">Date of Service Adding:</label>
-                            <div class="col-sm-8">
+                            <label for="focusedinput" class="col-sm-5 control-label">Date of Service Adding:</label>
+                            <div class="col-sm-7">
                                 {{$serviceData->date_of_adding}}
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="focusedinput" class="col-sm-4 control-label">Worker Allocated:</label>
-                            <div class="col-sm-8">
+                            <label for="focusedinput" class="col-sm-5 control-label">Worker Allocated:</label>
+                            <div class="col-sm-7">
                                 @if($serviceData->username==null)
                                     <div class="text-danger"><b>Worker not allocated yet!</b></div>
                                     @else

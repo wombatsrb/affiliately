@@ -83,8 +83,8 @@ class Services {
                 ]);
         return $result;
     }
-    
-     public function getAllServices(){
+
+    public function getAllServices(){
         $result = DB::table('services')
                 ->join('services_categories', 'id_service_category','=', 'service_category_id')
                 ->join('services_types', 'id_service_type', '=', 'service_type_id')
@@ -92,7 +92,7 @@ class Services {
         
         return $result;
     }
-    
+
     public function getServiceById($id){
         $result = DB::table('services')
                 ->join('services_categories', 'id_service_category','=', 'service_category_id')
@@ -102,7 +102,7 @@ class Services {
         
         return $result;
     }
-    
+
     public function editServiceById($id){
         $result = DB::table('services')
                 ->where('id_service', '=', $id)
@@ -117,7 +117,7 @@ class Services {
         
         return $result;
     }
-    
+
     public function deleteService($id){
         $result = DB::table('services')
                 ->where('id_service','=',$id)
