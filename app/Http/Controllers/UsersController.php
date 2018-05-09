@@ -57,9 +57,9 @@ class UsersController extends AdminController
         }
     }
     public function editUserView($id){
-        
+
         $this->data['userData'] = $this->userInstance->getUserById($id);
-        
+        $this->data['ordersData'] = $this->orderInstance->getOrdersByUserId($id);
         
         return view('pages.back.modifyUser', $this->data);
         
