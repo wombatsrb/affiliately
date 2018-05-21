@@ -46,7 +46,21 @@
                         </tr>
                         <tr>
                             <td>Order Status</td>
-                            <td>{{$orderData->order_status_name}}</td>
+                            <td>
+                                <form method="POST" action="{{route('orderStatusChange', ['id'=>$orderData->id_order])}}">
+                                    {{csrf_field()}}
+                                    <select name="order_status">
+                                        @foreach($orderStatuses as $orderStatus)
+                                            <option value="{{$orderStatus->id_order_status}}"
+                                            @if($orderData->id_order_status==$orderStatus->id_order_status)
+                                                selected == selected
+                                                    @endif
+                                            >{{$orderStatus->order_status_name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <button type="submit" class="btn btn-primary">Change Status</button>
+                                </form>
+                            </td>
                         </tr>
                         <tr>
                             <td>Payment Status</td>

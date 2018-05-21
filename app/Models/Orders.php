@@ -15,7 +15,16 @@ class Orders
     private $order_service_status_id;
     private $worker_id;
     private $message;
+    private $order_status_id;
 
+    public function getOrderStatusId()
+    {
+        return $this->order_status_id;
+    }
+    public function setOrderStatusId($order_status_id): void
+    {
+        $this->order_status_id = $order_status_id;
+    }
     public function getUserId()
     {
         return $this->user_id;
@@ -123,6 +132,8 @@ class Orders
     public function getMessagesByOrderService($id){
         $result = DB::table('orders_services_comments')
             ->where('order_service_id', '=', $id)
+            ->join('users', 'user_id', '=', 'id_user')
+            ->join('roles', 'role_id', '=', 'id_role')
             ->get();
 
         return $result;
@@ -133,12 +144,27 @@ class Orders
             ->insert([
                 'order_service_id' => $id,
                 'user_id' => $this->user_id,
-                'message' => $this->message
+                'message' => $this->message,
+                'seenByUser' => 0,
+                'seenByWorker' => 1,
+                'seenByWorkerDate' => now()
             ]);
 
         return $result;
     }
+    public function changeSeenStatus($orderServiceId){
+        $result = DB::table('orders_services_comments')
+            ->where([
+                ['order_service_id', '=', $orderServiceId],
+                ['seenByWorker', '=', 0]
+            ])
+            ->update([
+                'seenByWorker' => 1,
+                'seenByWorkerDate' => now()
+            ]);
 
+        return $result;
+    }
     public function getOrdersByUserId($id) {
         $result = DB::table('orders')
             ->where('user_id','=',$id)
@@ -150,6 +176,35 @@ class Orders
 
         return $result;
     }
+    public function changeOrderStatus($orderId){
+        $result = DB::table('orders')
+            ->where('id_order', '=', $orderId)
+            ->update([
+                'order_status_id' => $this->getOrderStatusId()
+            ]);
+        return $result;
 
+    }
+    public function checkIfWorkerJob($idWorker, $idServiceOrder){
+        $result = DB::table('orders_services')
+            ->where([
+                ['worker_id', '=', $idWorker],
+                ['id_order_service', '=', $idServiceOrder]
+            ]);
 
+        return $result;
+    }
+    public function getOrderServiceByWorkerId($workerId){
+        $result = DB::table('orders_services')
+            ->join('orders_services_statuses', 'order_service_status_id', '=', 'id_order_service_status')
+            ->join('services', 'service_id', '=', 'id_service')
+            ->join('services_types', 'service_type_id', '=', 'id_service_type')
+            ->join('services_categories', 'service_category_id', '=', 'id_service_category')
+            ->leftJoin('users','orders_services.worker_id', '=', 'users.id_user')
+            ->select('orders_services.*', 'orders_services_statuses.*', 'services.*', 'services_types.*', 'services_categories.*', 'orders_services.worker_id',  'users.username')
+            ->where('worker_id', '=', $workerId)
+            ->get();
+
+        return $result;
+    }
 }

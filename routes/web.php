@@ -24,9 +24,11 @@ Route::group([ 'middleware' => 'user'], function() {
 
 Route::group([ 'middleware' => 'worker'], function() {
     Route::get('/admin/dashboard', 'AdminController@adminDashboard')->name('adminDashboard');
-        
-    
+    Route::get('/admin/jobs', 'OrdersController@workerJobsView')->name('workerJobsView');
+    Route::get('/admin/order/service/{id}', 'OrdersController@orderServiceView')->name('orderServiceView');
+
 });
+
 
 Route::group([ 'middleware' => 'admin'], function() {
     Route::get('/admin/user/add', 'UsersController@addUserView')->name('addUserView');
@@ -55,8 +57,8 @@ Route::group([ 'middleware' => 'admin'], function() {
     Route::get('/admin/order/{id}', 'OrdersController@orderView')->name('orderView');
     Route::get('/admin/order/create', 'OrdersController@orderCreateView')->name('orderCreateView');
     Route::post('/admin/order/create', 'OrdersController@orderCreate')->name('orderCreate');
+    Route::post('/admin/order/status/change/{id}', 'OrdersController@orderStatusChange')->name('orderStatusChange');
 
-    Route::get('/admin/order/service/{id}', 'OrdersController@orderServiceView')->name('orderServiceView');
     Route::post('/admin/order/service/charge', 'CreditsController@chargeServiceOrder')->name('chargeServiceOrder');
     Route::post('/admin/order/service/status/{id}', 'OrdersController@orderServiceStatusUpdate')->name('orderServiceStatusUpdate');
     Route::post('/admin/order/service/worker/{id}', 'OrdersController@orderServiceWorkerUpdate')->name('orderServiceWorkerUpdate');

@@ -45,5 +45,11 @@ class Others {
                 ->get();
         return $result;
     }
+
+    public function getOrderStatuses(){
+        $result = DB::table('orders_statuses')
+            ->get();
+        return $result;
+    }
     
 }
