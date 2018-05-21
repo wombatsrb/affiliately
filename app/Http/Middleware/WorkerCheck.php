@@ -7,9 +7,10 @@ use Closure;
 class WorkerCheck
 {
 
-    
+
     public function handle($request, Closure $next)
     {
+
         if($request->session()->has('user')){
             $user = $request->session()->get('user');
             if($user->role_name == 'Worker' || $user->role_name == 'Admin'){
@@ -18,7 +19,7 @@ class WorkerCheck
                 return abort(404);
             }
         }
-        
+
         return abort(404);
     }
 }
