@@ -35,7 +35,7 @@ Route::group([ 'middleware' => 'admin'], function() {
     Route::get('/admin/user/modify/{id}', 'UsersController@editUserView')->name('editUserView');
     Route::post('/admin/user/modify/{id}', 'UsersController@editUser')->name('editUser');
     Route::get('/admin/user/delete/{id}', 'UsersController@deleteUser')->name('deleteUser');
-    
+    Route::post('/admin/user/credit/{id}', 'CreditsController@addUserFunds')->name('addUserFunds');
     
     Route::get('/admin/menu', 'MenusController@viewMenu')->name('viewMenu');
     Route::post('/admin/menu/add', 'MenusController@addMenu')->name('addMenu');
@@ -63,5 +63,8 @@ Route::group([ 'middleware' => 'admin'], function() {
 
     Route::post('/order/service/message/{id}', 'OrdersController@orderServiceSendMessage')->name('orderServiceSendMessage');
     Route::post('/admin/order/service/charge/history/{idOrderService}', 'CreditsController@getServiceChargeHistory')->name('getServiceChargeHistory');
+
+
+
 
 });

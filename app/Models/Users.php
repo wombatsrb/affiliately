@@ -33,94 +33,72 @@ class Users {
     function getRole_id() {
         return $this->role_id;
     }
-
     function getUser_status_id() {
         return $this->user_status_id;
     }
-
     function getEmail(){
         return $this->email;
     }
     function getPassword(){
         return $this->password;
-    }  
-    
+    }
     function getName() {
         return $this->name;
     }
-
     function getSurname() {
         return $this->surname;
     }
-
     function getAddress1() {
         return $this->address1;
     }
-
     function getAddress2() {
         return $this->address2;
     }
-
     function getCity() {
         return $this->city;
     }
-
     function getCountry() {
         return $this->country;
     }
-
     function getZip() {
         return $this->zip;
     }
-
     function getUsername() {
         return $this->username;
     }
-
     function setRole_id($role_id) {
         $this->role_id = $role_id;
     }
-
     function setUser_status_id($user_status_id) {
         $this->user_status_id = $user_status_id;
     }
-    
     function setName($name) {
         $this->name = $name;
     }
-
     function setSurname($surname) {
         $this->surname = $surname;
     }
-
     function setAddress1($address1) {
         $this->address1 = $address1;
     }
-
     function setAddress2($address2) {
         $this->address2 = $address2;
     }
-
     function setCity($city) {
         $this->city = $city;
     }
-
     function setCountry($country) {
         $this->country = $country;
     }
-
     function setZip($zip) {
         $this->zip = $zip;
     }
-
     function setUsername($username) {
         $this->username = $username;
     }
-
     function setEmail($value){
         $this->email = $value;
-    } 
-     
+    }
     function setPassword($value){
         $this->password = $value;
     }
@@ -182,6 +160,7 @@ class Users {
         $result = DB::table('users')
                 ->join('roles', 'role_id','=', 'id_role')
                 ->join('users_statuses', 'user_status_id', '=', 'id_user_status')
+                ->leftJoin('credits', 'id_user', '=', 'user_id')
                 ->where('id_user', '=', $id)
                 ->first();
         
@@ -223,8 +202,26 @@ class Users {
         
         return $result;
     }
+    public function getUserCreditHistory($id){
+        $current_credit = DB::table('credits_transactions')
+            ->where('user_id', '=', $id)
+            ->get();
 
+        return $current_credit;
+    }
+    public function getUserServiceHistory($id){
+        $result = DB::table('orders_services')
+            ->join('orders', 'order_id', '=', 'id_order')
+            ->join('services', 'service_id', '=', 'id_service')
+            ->join('services_types', 'service_type_id', '=', 'id_service_type')
+            ->join('services_categories', 'service_category_id', '=', 'id_service_category')
+            ->join('orders_statuses', 'order_status_id', '=', 'id_order_status')
+            ->join('orders_services_statuses', 'order_service_status_id','=', 'id_order_service_status')
+            ->where('user_id', '=', $id)
+            ->get();
 
+        return $result;
+    }
     
     
     
