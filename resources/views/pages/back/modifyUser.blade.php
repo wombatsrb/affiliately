@@ -82,7 +82,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" align='center'><button type="submit" class="btn btn-success">Edit User</button></td>
+                            <td colspan="2" align='center'>
+                                <button type="submit" class="btn btn-success">Edit User</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align='center'>
+                                <a href="{{route('modifyUsersView')}}">Back to all users</a>
+                            </td>
                         </tr>
                 </table>
         </form>
@@ -109,6 +116,7 @@
                             <button type="submit" id="btn_charge_customer" class="btn btn-primary">Add Funds</button>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="focusedinput" class="col-sm-4 control-label">Adding Funds Description</label>
                         <div class="col-sm-8">

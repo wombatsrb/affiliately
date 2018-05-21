@@ -14,6 +14,7 @@ html, body{
     font-size: 100%;
   	overflow-x: hidden;
 	background: #fff;
+
 }
 body a{
 	transition: 0.5s all ease;
@@ -2846,7 +2847,7 @@ form.pull-right.mail-src-position {
     margin-top: -6px;
 }
 .agileinfo-cdr {
-    padding: 25px 27px;
+
 }
 .widget.widget-report-table {
     padding: 10px 0;
@@ -8484,15 +8485,4 @@ h4.asd label {
 
 .alert ul{
     list-style-type:none;
-}
-
-#messageBox2{
-
-}
-
-#messagesBox{
-    overflow: auto;
-    height:auto;
-    max-height: 800px;
-
 }
