@@ -42,8 +42,8 @@ class Credits
         return $result;
 
     }
-
     public function addUserCredit($id){
+
         $currentCredits = DB::table('credits')
             ->where('user_id', '=', $id)
             ->first()
@@ -57,9 +57,15 @@ class Credits
                 'amount' => $newCredits
             ]);
 
-        return $result;
-    }
+        $transactionDetails = DB::table('credits_transactions')
+            ->insert([
+                'user_id' => $id,
+                'transaction_amount' => $this->credit_amount,
+                'transaction_comment' => $this->getTransactionDescription()
+            ]);
 
+        return $currentCredits;
+    }
     public function chargeUser($id, $serviceOrderId){
         $currentCredit = DB::table('credits')
             ->where('user_id', '=', $id)
@@ -90,7 +96,6 @@ class Credits
         }
 
     }
-
     public function getServiceChargeHistory($idOrderService){
         $result = DB::table('credits_transactions')
             ->join('orders_services', 'order_service_id', '=', 'id_order_service')

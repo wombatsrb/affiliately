@@ -89,23 +89,30 @@
         </div>
         @if($userData->role_name=="User")
             <div class="sign-up-row  widget-shadow form-group">
-                 <form class="form-horizontal">
-                    <h1>Add User Funds</h1>
+                 <form class="form-horizontal" action="{{route('addUserFunds', ["id" => $userData->id_user])}}" method="POST">
+                     {{csrf_field()}}
+                     <div class="form-group">
+                         <label for="focusedinput" class="col-sm-4 control-label">Current credit</label>
+                         <div class="col-sm-8">
+                             <h3>{{$userData->amount}}</h3>
+                         </div>
+                     </div>
+
                     <div class="form-group">
-                        <label for="focusedinput" class="col-sm-4 control-label">Charge User</label>
+                        <label for="focusedinput" class="col-sm-4 control-label">Add User Funds</label>
                         <div class="col-sm-4">
                             <div class="text-danger">
-                                <input class="form-control1" type="number" id="charge_amount_input" min="0">
+                                <input class="form-control1" name="credits_amount" type="number" id="charge_amount_input" min="0">
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <a href="#" id="btn_charge_customer" class="btn btn-primary" role="button">Charge Customer</a>
+                            <button type="submit" id="btn_charge_customer" class="btn btn-primary">Add Funds</button>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="focusedinput" class="col-sm-4 control-label">Charge Description</label>
+                        <label for="focusedinput" class="col-sm-4 control-label">Adding Funds Description</label>
                         <div class="col-sm-8">
-                            <textarea class="form-control" placeholder="Enter detailed transaction details" id="transaction_details"></textarea>
+                            <textarea class="form-control" name="transaction_details"  placeholder="Enter detailed transaction details" id="transaction_details"></textarea>
                         </div>
                     </div>
                  </form>
@@ -113,54 +120,75 @@
             </div>
         @endif
     </div>
+    @if($userData->role_name=="User")
     <div class="col-md-8">
                 <div class="sign-up-row  widget-shadow form-group">
                     <table class="table">
                         <h2>Orders History</h2>
-                        <br>
-                        @if($ordersData->isNotEmpty())
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Date of Order</th>
-                                <th>Date of Update</th>
-                                <th>Order Status</th>
-                                <th>Payment Status</th>
-                                <th>Order Details</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($ordersData as $order)
-                                    <tr>
-                                        <th scope="row">{{$order->id_order}}</th>
-                                        <td>{{$order->date_of_order}}</td>
-                                        <td>{{$order->date_of_update}}</td>
-                                        <td>{{$order->order_status_name}}</td>
-                                        <td>
-                                            @if($order->payment_status==true)
-                                                Paid
-                                            @else
-                                                Unpaid
-                                            @endif
-                                        </td>
-                                        <td><a href='{{route('orderView', ['id' => $order->id_order])}}' ">View Details</a></td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        @else
+                        @if($serviceHistory->isEmpty())
+                            <br>
                             <div class="alert alert-warning" role="alert">
                                 There aren't any previous history records
                             </div>
+                        @else
+                            <table class="table">
+                                <tr>
+                                    <td>Service Order #</td>
+                                    <td>Service Name</td>
+                                    <td>Service Category</td>
+                                    <td>Order Date</td>
+                                    <td>Service Order Status</td>
+                                    <td>More Details</td>
+                                <tr>
+                                @foreach($serviceHistory as $serviceItem)
+                                    <tr>
+                                        <td>{{$serviceItem->id_order_service}}</td>
+                                        <td>{{$serviceItem->service_name}}</td>
+                                        <td>{{$serviceItem->service_category_name}}</td>
+                                        <td>{{$serviceItem->date_of_order}}</td>
+                                        <td>{{$serviceItem->order_service_status_name}}</td>
+                                        <td>
+                                            <a href="{{route('orderServiceView', ['id'=> $serviceItem->id_order_service])}}"><button type="button" class="btn btn-primary">View Service Order</button></a>
+                                        </td>
+                                    <tr>
+                                @endforeach
+                            </table>
                         @endif
 
+                    </table>
 
+                </div>
 
-
-
-
+                <div class="sign-up-row  widget-shadow form-group">
+                    <table class="table">
+                        <h2>Credits History</h2>
+                            @if($creditData->isEmpty())
+                            <br>
+                            <div class="alert alert-warning" role="alert">
+                            There isn't credit history for this user
+                            </div>
+                                @else
+                                <table class="table">
+                                    <tr>
+                                        <td>Transaction #</td>
+                                        <td>Amount</td>
+                                        <td>Comment</td>
+                                        <td>Date</td>
+                                    <tr>
+                                    @foreach($creditData as $creditItem)
+                                        <tr>
+                                            <td>{{$creditItem->id_credit_transaction}}</td>
+                                            <td>{{$creditItem->transaction_amount}}</td>
+                                            <td>{{$creditItem->transaction_comment}}</td>
+                                            <td>{{$creditItem->transaction_date}}</td>
+                                        <tr>
+                                    @endforeach
+                                </table>
+                                @endif
                     </table>
                 </div>
     </div>
+    @endif
     <div class='clearfix'></div>    
 </div>
 

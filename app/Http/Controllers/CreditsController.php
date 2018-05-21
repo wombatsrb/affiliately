@@ -15,8 +15,22 @@ class CreditsController extends AdminController
         $this->creditsInstance = new Credits();
     }
 
-    public function addUserCredits(Request $request){
+    public function addUserFunds($id, Request $request){
+        $rules  = $request->validate([
+            'transaction_details' => 'required|min:10|max:100',
+            'credits_amount' => 'required|numeric|min:0|max:5000'
+        ]);
 
+        $this->creditsInstance->setCreditAmount($request->credits_amount);
+        $this->creditsInstance->setTransactionDescription($request->transaction_details);
+        $result = $this->creditsInstance->addUserCredit($id);
+
+        if($result){
+            return redirect()->route('editUserView', ['id'=>$id])->with('success', 'Funds has been added to user account');
+        }
+        else {
+            return redirect()->route('editUserView', ['id'=>$id])->with('error', 'There has been some error with adding credits');
+        }
     }
     public function chargeServiceOrder(Request $request)
     {
@@ -39,7 +53,6 @@ class CreditsController extends AdminController
         }
 
     }
-
     public function getServiceChargeHistory($idOrderService){
 
         $chargeData = $this->creditsInstance->getServiceChargeHistory($idOrderService);
