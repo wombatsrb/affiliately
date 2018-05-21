@@ -95,6 +95,7 @@
                         </div>
                     </div>
                     <br>
+                    @if(session()->get('user')->role_name=="Admin")
                     <div class="form-group">
                         <label for="focusedinput" class="col-sm-4 control-label">Charge User</label>
                         <div class="col-sm-4">
@@ -113,6 +114,7 @@
                         </div>
                     </div>
                     <br>
+                        @endif
                 </form>
                 <div class="alert alert-danger" id="errorMessage">
                 </div>
