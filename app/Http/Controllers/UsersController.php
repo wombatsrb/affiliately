@@ -57,9 +57,8 @@ class UsersController extends AdminController
         }
     }
     public function editUserView($id){
-        
-        $this->data['userData'] = $this->userInstance->getUserById($id);
 
+        $this->data['userData'] = $this->userInstance->getUserById($id);
         if($this->data['userData']->role_name=='User'){
             $this->data['creditData'] = $this->userInstance->getUserCreditHistory($id);
             $this->data['serviceHistory'] = $this->userInstance->getUserServiceHistory($id);
