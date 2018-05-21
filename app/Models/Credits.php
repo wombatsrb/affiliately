@@ -48,8 +48,10 @@ class Credits
             ->where('user_id', '=', $id)
             ->first()
             ->amount;
+        $currentCredits = strval($currentCredits);
+        $creditsAmount = strval($this->getCreditAmount());
 
-        $newCredits = $currentCredits + $this->getCreditAmount();
+        $newCredits = $currentCredits + $creditsAmount;
 
         $result = DB::table('credits')
             ->where('user_id', '=', $id)
@@ -64,7 +66,7 @@ class Credits
                 'transaction_comment' => $this->getTransactionDescription()
             ]);
 
-        return $currentCredits;
+        return $result;
     }
     public function chargeUser($id, $serviceOrderId){
         $currentCredit = DB::table('credits')
