@@ -139,7 +139,17 @@ class Orders
         return $result;
     }
 
+    public function getOrdersByUserId($id) {
+        $result = DB::table('orders')
+            ->where('user_id','=',$id)
+            ->groupBy('id_order')
+            ->join('orders_statuses','orders.order_status_id', '=', 'id_order_status')
+            ->join('users','orders.user_id','=', 'users.id_user')
+            ->select('orders.*', 'orders_statuses.*', 'users.name', 'users.surname', 'users.email')
+            ->get();
 
+        return $result;
+    }
 
 
 }

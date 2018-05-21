@@ -125,7 +125,6 @@
                 <div class="sign-up-row  widget-shadow form-group">
                     <table class="table">
                         <h2>Orders History</h2>
-
                         @if($serviceHistory->isEmpty())
                             <br>
                             <div class="alert alert-warning" role="alert">
@@ -186,7 +185,6 @@
                                     @endforeach
                                 </table>
                                 @endif
-
                     </table>
                 </div>
     </div>
