@@ -71,6 +71,10 @@
                                                    
                     <div class="sub_home">
                                     <input name='editService' value="Edit Service" type="submit">
+
+                                    <span>
+                                        <a href="{{route('modifyServiceView')}}">Back to all services</a>
+                                    </span>
                             <div class="clearfix"> </div>
                     </div>
             </form>

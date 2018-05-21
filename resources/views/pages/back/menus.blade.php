@@ -4,9 +4,10 @@
     @include('components.back.displayMessages')
     <form method="POST" action="{{route('addMenu')}}">
     {{ csrf_field() }}
+
 <div class="table-responsive bs-example widget-shadow">
     <br>
-    <h3 align="center">Add Menu Item:</h3>
+    <h3 align="center">Add Menu Item</h3>
     <br>
     <div class=" col-md-12">
     <table class="table table-bordered"> 
@@ -45,7 +46,7 @@
                            @endforeach
                         </select>
                 </td>
-                <td><button type='submit' class="form-control label label-success">Dodaj</button></td>  
+                <td><button type='submit' class="form-control btn btn-success">Add</button></td>
             </tr>
         </tbody> 
     </table> 
@@ -56,7 +57,7 @@
 
 <div class="table-responsive bs-example widget-shadow">
     <br>
-    <h3 align="center">Menus for Admin:</h3>
+    <h3 align="center">Menus for Admin</h3>
     <br>
     <div class=" col-md-12">
     <table class="table table-bordered"> 
@@ -67,8 +68,8 @@
                 <th>Priority</th> 
                 <th>Route</th> 
                 <th>Icon</th>
-                <th>Edit</th>
-                <th>Delete</th>  
+                <th width="1%">Modify</th>
+                <th width="1%">Delete</th>
             </tr> 
         </thead> 
         <tbody> 
@@ -80,8 +81,8 @@
                 <td>{{ $menuItem->menu_priority }}</td> 
                 <td>{{ $menuItem->url }}</td> 
                 <td>{{ $menuItem->menu_icon }}</td> 
-                <td><a href="{{route('editMenu', ['id' => $menuItem->id_menu])}}"><span class="form-control label label-warning">Izmeni</span></a></td> 
-                <td><a href="{{route('deleteMenu', ['id' => $menuItem->id_menu])}}"><span class="form-control label label-danger">Izbrisi</span></a></td> 
+                <td><a href="{{route('editMenu', ['id' => $menuItem->id_menu])}}"><span class="btn btn-primary">Modify</span></a></td>
+                <td><a href="{{route('deleteMenu', ['id' => $menuItem->id_menu])}}"><span class="btn btn-danger">Delete</span></a></td>
             </tr>
             @endforeach
         </tbody> 
@@ -91,7 +92,7 @@
 
 <div class="table-responsive bs-example widget-shadow">
     <br>
-    <h3 align="center">Menus for Workers:</h3>
+    <h3 align="center">Menus for Workers</h3>
     <br>
     <div class=" col-md-12">
     <table class="table table-bordered"> 
@@ -102,8 +103,8 @@
                 <th>Priority</th> 
                 <th>Route</th> 
                 <th>Icon</th>
-                <th>Edit</th>
-                <th>Delete</th>  
+                <th width="1%">Modify</th>
+                <th width="1%">Delete</th>
             </tr> 
         </thead> 
         <tbody> 
@@ -115,8 +116,8 @@
                 <td>{{ $menuItem->menu_priority }}</td> 
                 <td>{{ $menuItem->url }}</td> 
                 <td>{{ $menuItem->menu_icon }}</td> 
-                <td><a href="{{route('editMenu', ['id' => $menuItem->id_menu])}}"><span class="form-control label label-warning">Izmeni</span></a></td> 
-                <td><a href="{{route('deleteMenu', ['id' => $menuItem->id_menu])}}"><span class="form-control label label-danger">Izbrisi</span></a></td> 
+                <td><a href="{{route('editMenu', ['id' => $menuItem->id_menu])}}"><span class="btn btn-primary">Modify</span></a></td>
+                <td><a href="{{route('deleteMenu', ['id' => $menuItem->id_menu])}}"><span class="btn btn-danger">Delete</span></a></td>
             </tr>
             @endforeach
         </tbody> 
@@ -126,7 +127,7 @@
 
 <div class="table-responsive bs-example widget-shadow">
     <br>
-    <h3 align="center">Menus for Users:</h3>
+    <h3 align="center">Menus for Users</h3>
     <br>
     <div class=" col-md-12">
     <table class="table table-bordered"> 
@@ -137,8 +138,8 @@
                 <th>Priority</th> 
                 <th>Route</th> 
                 <th>Icon</th>
-                <th>Edit</th>
-                <th>Delete</th>  
+                <th width="1%">Modify</th>
+                <th width="1%">Delete</th>
             </tr> 
         </thead> 
         <tbody> 
@@ -150,8 +151,8 @@
                 <td>{{ $menuItem->menu_priority }}</td> 
                 <td>{{ $menuItem->url }}</td> 
                 <td>{{ $menuItem->menu_icon }}</td> 
-                <td><a href="{{route('editMenu', ['id' => $menuItem->id_menu])}}"><span class="form-control label label-warning">Izmeni</span></a></td> 
-                <td><a href="{{route('deleteMenu', ['id' => $menuItem->id_menu])}}"><span class="form-control label label-danger">Izbrisi</span></a></td> 
+                <td><a href="{{route('editMenu', ['id' => $menuItem->id_menu])}}"><span class="btn btn-primary">Modify</span></a></td>
+                <td><a href="{{route('deleteMenu', ['id' => $menuItem->id_menu])}}"><span class="btn btn-danger">Delete</span></a></td>
             </tr>
             @endforeach
         </tbody> 

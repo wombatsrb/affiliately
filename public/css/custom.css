@@ -106,3 +106,15 @@
 #errorMessage, #successMessage{
     display:none;
 }
+
+#message-div {
+    position:relative;
+    height: 100%;
+}
+
+#scroll {
+    overflow: auto;
+    height:auto;
+    max-height: 450px;
+    position: static;
+}

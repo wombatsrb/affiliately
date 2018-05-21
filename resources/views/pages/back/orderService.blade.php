@@ -129,7 +129,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="sign-up-row  widget-shadow form-group">
+            <div id="message-div" class="sign-up-row  widget-shadow form-group">
                 <div class="card card-contact-list" id="messagesBox">
                     <div class="agileinfo-cdr" id="messageBox2">
                         <div class="card-header">
@@ -138,7 +138,7 @@
                         <hr class="widget-separator">
                         <div class="card-body p-b-20">
                             <div class="list-group">
-                                <div class="messages">
+                                <div id="scroll" class="messages">
                                 @foreach($messages as $message)
                                     @if($message->user_id != session()->get('user')->id_user)
                                         <div class="messageLeft list-group-item media">
@@ -187,7 +187,7 @@
                                             </form>
                                         </div>
                                     </div>
-                            </div>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -350,6 +350,11 @@
 
 
             showChargingHistory(serviceOrderId);
+
+            var objDiv = $('#scroll');
+            if (objDiv.length > 0){
+                objDiv[0].scrollTop = objDiv[0].scrollHeight;
+            }
         });
     </script>
 @endsection

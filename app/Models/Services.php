@@ -88,6 +88,7 @@ class Services {
         $result = DB::table('services')
                 ->join('services_categories', 'id_service_category','=', 'service_category_id')
                 ->join('services_types', 'id_service_type', '=', 'service_type_id')
+                ->orderBy('service_status','desc')
                 ->get();
         
         return $result;

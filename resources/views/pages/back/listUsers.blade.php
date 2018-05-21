@@ -30,9 +30,19 @@
 						<td>{{$user->username}}</td>
                                                 <td>{{$user->email}}</td>
                                                 <td>{{$user->role_name}}</td>
-                                                <td>{{$user->status_name}}</td>
-                                                <td><a href='{{route('editUserView', ['id' => $user->id_user])}}'>Modify</a></td>
-                                                <td><a href='{{route('deleteUser', ['id' => $user->id_user])}}' onclick="return confirm('Are you sure?')">Delete</a></td>
+                                                <td><span
+													@if($user->user_status_id == 1)
+														class="badge badge-warning"
+													@endif
+													@if($user->user_status_id == 2)
+														class="badge badge-success"
+													@endif
+													@if($user->user_status_id == 3)
+														class="badge badge-danger"
+													@endif
+													>{{$user->status_name}}</span></td>
+                                                <td><a class="btn btn-primary" href='{{route('editUserView', ['id' => $user->id_user])}}'>Modify</a></td>
+                                                <td><a class="btn btn-danger" href='{{route('deleteUser', ['id' => $user->id_user])}}' onclick="return confirm('Are you sure?')">Delete</a></td>
 					</tr>
                                     @endforeach
                                 </tbody>

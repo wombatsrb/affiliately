@@ -140,6 +140,8 @@ class Users {
         $result = DB::table('users')
                 ->join('roles', 'role_id','=', 'id_role')
                 ->join('users_statuses', 'user_status_id', '=', 'id_user_status')
+                ->orderBy('user_status_id','asc')
+                ->orderBy('role_id','asc')
                 ->get();
         
         return $result;
