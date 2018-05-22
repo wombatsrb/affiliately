@@ -72,6 +72,11 @@
                                 @endif
                             </td>
                         </tr>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <a href="{{route('ordersView')}}">View All Orders</a>
+                            </td>
+                        </tr>
                     </table>
                 </div>
 

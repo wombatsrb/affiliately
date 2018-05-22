@@ -106,7 +106,7 @@ class Users {
 
     public function checkAdmin(){
         $result = DB::table('users')
-                ->select('id_user', 'name', 'surname', 'role_name')
+                ->select('id_user', 'name', 'surname', 'role_name', 'role_id')
                 ->where([
                     'email' => $this->email,
                     'password' => md5($this->password)

@@ -27,6 +27,9 @@ Route::group([ 'middleware' => 'worker'], function() {
     Route::get('/admin/jobs', 'OrdersController@workerJobsView')->name('workerJobsView');
     Route::get('/admin/order/service/{id}', 'OrdersController@orderServiceView')->name('orderServiceView');
 
+    Route::post('/order/service/message/{id}', 'OrdersController@orderServiceSendMessage')->name('orderServiceSendMessage');
+    Route::post('/admin/order/service/charge/history/{idOrderService}', 'CreditsController@getServiceChargeHistory')->name('getServiceChargeHistory');
+
 });
 
 
@@ -62,11 +65,6 @@ Route::group([ 'middleware' => 'admin'], function() {
     Route::post('/admin/order/service/charge', 'CreditsController@chargeServiceOrder')->name('chargeServiceOrder');
     Route::post('/admin/order/service/status/{id}', 'OrdersController@orderServiceStatusUpdate')->name('orderServiceStatusUpdate');
     Route::post('/admin/order/service/worker/{id}', 'OrdersController@orderServiceWorkerUpdate')->name('orderServiceWorkerUpdate');
-
-    Route::post('/order/service/message/{id}', 'OrdersController@orderServiceSendMessage')->name('orderServiceSendMessage');
-    Route::post('/admin/order/service/charge/history/{idOrderService}', 'CreditsController@getServiceChargeHistory')->name('getServiceChargeHistory');
-
-
 
 
 });
