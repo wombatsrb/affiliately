@@ -1,87 +1,142 @@
-		<!-- header-starts -->
+<!-- header-starts -->
+
+		{{-- dd($pendingOrders) --}}
+
 		<div class="sticky-header header-section ">
 			<div class="header-left">
-				
 				<div class="profile_details_left"><!--notifications of menu start -->
 					<ul class="nofitications-dropdown">
+
+						{{-- za workera --}}
+						@if(session()->get('user')->role_id == 3)
 						<li class="dropdown head-dpdn">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">4</span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">{{ count($unreadMessages) }}</span></a>
 							<ul class="dropdown-menu">
+
+							@if($unreadMessages->isNotEmpty())
 								<li>
 									<div class="notification_header">
-										<h3>You have 3 new messages</h3>
+										<h3>You have {{ count($unreadMessages) }} new messages</h3>
 									</div>
 								</li>
-								<li><a href="#">
-								   <div class="user_img"><img src="" alt=""></div>
-								   <div class="notification_desc">
-									<p>Lorem ipsum dolor amet</p>
-									<p><span>1 hour ago</span></p>
+								@foreach($unreadMessages as $message)
+									<li><a href="{{route('orderServiceView', ['id' => $message->order_service_id])}}">
+									   <div class="user_img"><img src="" alt=""></div>
+									   <div class="notification_desc">
+										<p>{{ $message->message }}</p>
+										<p><span>{{ $message->date_of_comment }}</span></p>
+										</div>
+									   <div class="clearfix"></div>
+									</a></li>
+								@endforeach
+							@else
+								<li>
+									<div class="notification_header">
+										<h3>No unread messages!</h3>
 									</div>
-								   <div class="clearfix"></div>	
-								</a></li>
-								<li class="odd"><a href="#">
+								</li>
+							@endif
+							</ul>
+						</li>
+
+						<li class="dropdown head-dpdn">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i><span class="badge blue1">{{ count($allocatedServices) }}</span></a>
+							<ul class="dropdown-menu">
+
+								@if($allocatedServices->isNotEmpty())
+									<li>
+										<div class="notification_header">
+											<h3>You have {{ count($allocatedServices) }} started works</h3>
+										</div>
+									</li>
+
+									@foreach($allocatedServices as $service)
+										<li><a href="{{route('orderServiceView', ['id' => $service->id_order_service])}}">
+												<div class="user_img"><img src="" alt=""></div>
+												<div class="notification_desc">
+													<p><b>{{ $service->service_name }}</p>
+													<p><span>{{ $service->service_description }}</span></p>
+												</div>
+												<div class="clearfix"></div>
+										</a></li>
+									@endforeach
+								@else
+									<li>
+										<div class="notification_header">
+											<h3>No started works!</h3>
+										</div>
+									</li>
+								@endif
+							</ul>
+						</li>
+						@endif
+						{{-- za admina --}}
+						@if(session()->get('user')->role_id == 2)
+						<li class="dropdown head-dpdn">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">{{ count($pendingOrders) }}</span></a>
+							<ul class="dropdown-menu">
+
+								@if($pendingOrders->isNotEmpty())
+								<li>
+									<div class="notification_header">
+										<h3>You have {{ count($pendingOrders) }} pending orders</h3>
+									</div>
+								</li>
+								@foreach($pendingOrders as $order)
+								<li><a href="{{route('orderView', ['id' => $order->id_order])}}">
 									<div class="user_img"><img src="" alt=""></div>
-								   <div class="notification_desc">
-									<p>Lorem ipsum dolor amet </p>
-									<p><span>1 hour ago</span></p>
+								   	<div class="notification_desc">
+									<p><b>Customer:</b> {{ $order->name }} {{ $order->surname }}</p>
+									<p><span>{{ $order->date_of_order }}</span></p>
 									</div>
 								  <div class="clearfix"></div>	
-								</a></li>
-								<li><a href="#">
-								   <div class="user_img"><img src="" alt=""></div>
-								   <div class="notification_desc">
-									<p>Lorem ipsum dolor amet </p>
-									<p><span>1 hour ago</span></p>
-									</div>
-								   <div class="clearfix"></div>	
-								</a></li>
-								<li>
+								 </a></li>
+								@endforeach
+								@else
+									<li>
+										<div class="notification_header">
+											<h3>No pending orders!</h3>
+										</div>
+									</li>
+								@endif
+								 <li>
 									<div class="notification_bottom">
-										<a href="#">See all messages</a>
-									</div> 
+										<a href="{{ route('ordersView') }}">See all orders</a>
+									</div>
 								</li>
 							</ul>
 						</li>
 						<li class="dropdown head-dpdn">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">4</span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i><span class="badge blue1">{{ count($waitingAllocation) }}</span></a>
 							<ul class="dropdown-menu">
-								<li>
-									<div class="notification_header">
-										<h3>You have 3 new notification</h3>
-									</div>
-								</li>
-								<li><a href="#">
-									<div class="user_img"><img src="" alt=""></div>
-								   <div class="notification_desc">
-									<p>Lorem ipsum dolor amet</p>
-									<p><span>1 hour ago</span></p>
-									</div>
-								  <div class="clearfix"></div>	
-								 </a></li>
-								 <li class="odd"><a href="#">
-									<div class="user_img"><img src="" alt=""></div>
-								   <div class="notification_desc">
-									<p>Lorem ipsum dolor amet </p>
-									<p><span>1 hour ago</span></p>
-									</div>
-								   <div class="clearfix"></div>	
-								 </a></li>
-								 <li><a href="#">
-									<div class="user_img"><img src="" alt=""></div>
-								   <div class="notification_desc">
-									<p>Lorem ipsum dolor amet </p>
-									<p><span>1 hour ago</span></p>
-									</div>
-								   <div class="clearfix"></div>	
-								 </a></li>
-								 <li>
-									<div class="notification_bottom">
-										<a href="#">See all notifications</a>
-									</div> 
-								</li>
+								@if($waitingAllocation->isNotEmpty())
+									<li>
+										<div class="notification_header">
+											<h3>You have {{ count($waitingAllocation) }} services waiting for allocation</h3>
+										</div>
+									</li>
+									@foreach($waitingAllocation as $service)
+										<li><a href="{{route('orderServiceView', ['id' => $service->id_order_service])}}">
+												<div class="user_img"><img src="" alt=""></div>
+												<div class="notification_desc">
+													<p><b>{{ $service->service_name }}</p>
+													<p><span>{{ $service->service_description }}</span></p>
+												</div>
+												<div class="clearfix"></div>
+											</a></li>
+									@endforeach
+								@else
+									<li>
+										<div class="notification_header">
+											<h3>No pending services!</h3>
+										</div>
+									</li>
+								@endif
 							</ul>
-						</li>	
+						</li>
+						@endif
+						{{--
+						@if((session()->get('user')->role_id == 2) || (session()->get('user')->role_id == 3))
 						<li class="dropdown head-dpdn">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i><span class="badge blue1">8</span></a>
 							<ul class="dropdown-menu">
@@ -132,7 +187,9 @@
 									</div> 
 								</li>
 							</ul>
-						</li>	
+						</li>
+						@endif
+						--}}
 					</ul>
 					<div class="clearfix"> </div>
 				</div>

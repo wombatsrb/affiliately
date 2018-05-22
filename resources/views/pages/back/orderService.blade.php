@@ -79,6 +79,7 @@
                             </select>
                         </div>
                     </div>
+                    @if(session()->get('user')->role_name=="Admin")
                     <div class="form-group">
                         <label for="focusedinput" class="col-sm-4 control-label">Allocated Worker:</label>
                         <div class="col-sm-8">
@@ -95,22 +96,26 @@
                         </div>
                     </div>
                     <br>
-                    @if(session()->get('user')->role_name=="Admin")
                     <div class="form-group">
                         <label for="focusedinput" class="col-sm-4 control-label">Charge User</label>
                         <div class="col-sm-4">
                             <div class="text-danger">
-                                <input class="form-control1" type="number" id="charge_amount_input" min="0">
+                                <input class="form-control1" type="number" placeholder="Amount" id="charge_amount_input" min="0">
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <a href="#" id="btn_charge_customer" class="btn btn-primary" role="button">Charge Customer</a>
-                        </div>
                     </div>
+                    <div class="clearfix"></div>
                     <div class="form-group">
                         <label for="focusedinput" class="col-sm-4 control-label">Charge Description</label>
                         <div class="col-sm-8">
                             <textarea class="form-control" placeholder="Enter detailed transaction details" id="transaction_details"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                        </div>
+                        <div class="col-sm-4">
+                            <a href="#" id="btn_charge_customer" class="btn btn-primary" role="button">Charge Customer</a>
                         </div>
                     </div>
                     <br>
@@ -121,6 +126,7 @@
                 <div class="alert alert-success" id="successMessage">
                 </div>
             </div>
+            <div class="clearfix"></div>
         </div>
         <div class="col-md-4">
             <div class="sign-up-row  widget-shadow form-group">
@@ -145,28 +151,26 @@
                                     @if($message->user_id != session()->get('user')->id_user)
                                         <div class="messageLeft list-group-item media">
                                             <div class="pull-left">
-                                                <img class="lg-item-img" src="{{asset('/')}}images/w.png" width="50px" align="left" alt=""><br>
-                                                <div class="lg-item-heading" align="left">{{$message->name}} - <i>{{$message->role_name}}</i></div><br>
+                                                <div class="lg-item-heading" align="left">{{$message->name}} (<i>{{$message->role_name}}</i>)</div><br>
                                                 <small><i>{{date("d/m/Y G:i", strtotime($message->date_of_comment))}}</i></small>
+                                                <div class="clearfix"></div>
                                             </div>
                                             <div class="media-body">
-                                                <div class="pull-left">
+                                                <div class="pull-right">
                                                     <small class="lg-item-text">
                                                         {{$message->message}}
                                                     </small>
-
                                                 </div>
                                             </div>
-
+                                            <div class="clearfix"></div>
                                         </div>
-
                                         <hr>
                                     @else
                                         <div class="messageRight list-group-item media">
                                             <div class="pull-right">
-                                                <img class="lg-item-img" src="{{asset('/')}}images/y.png" align="right" width="50px" alt=""><br>
                                                 <div class="lg-item-heading" align="right">You</div><br>
                                                 <small><i>{{date("d/m/Y G:i", strtotime($message->date_of_comment))}}</i></small>
+                                                <div class="clearfix"></div>
                                             </div>
                                             <div class="media-body">
                                                 <div class="pull-left">
@@ -175,7 +179,7 @@
                                                     </small>
                                                 </div>
                                             </div>
-
+                                            <div class="clearfix"></div>
                                         </div>
                                         <hr>
                                     @endif
@@ -184,7 +188,7 @@
                                     <div class="panel-default">
                                         <div class="panel-body">
                                             <form class="com-mail">
-                                                <textarea rows="4" name="messageText" id="messageText" class="form-control1 control1" min="2" max="1000" placeholder="Message :"></textarea>
+                                                <textarea rows="4" name="messageText" id="messageText" class="form-control1 control1" min="2" max="1000" placeholder="Message"></textarea>
                                                 <button name="sendMessage" id="sendMessage" type="button" class="btn btn-primary">Send Message</button>
                                             </form>
                                         </div>
@@ -198,10 +202,21 @@
     </div>
     <div class="clearfix"></div>
     <script>
+
+        function scroll() {
+            var objDiv = $('#scroll');
+            if(objDiv[0].scrollTop == 0) {
+                objDiv[0].scrollTop = objDiv[0].scrollHeight + 100;
+            }
+        }
+
         const token = '{{ csrf_token() }}';
         const baseURL = "{{ asset('/') }}";
         var message = "";
         $(document).ready(function(){
+
+            scroll();
+
             const serviceOrderId = '{{$orderServiceData->id_order_service}}';
             const userId = '{{session()->get('user')->id_user}}';
 
@@ -301,6 +316,7 @@
                         success: function (data) {
                             console.log(data);
                             updateDiv();
+                            scroll();
                         },
                         error: function (data) {
                             var errors = data.responseJSON;
@@ -344,19 +360,17 @@
                 });
             }
 
+
+
             // Load messages
             function updateDiv()
             {
                 $( ".messages" ).load(window.location.href + " .messages" );
             }
 
-
             showChargingHistory(serviceOrderId);
 
-            var objDiv = $('#scroll');
-            if (objDiv.length > 0){
-                objDiv[0].scrollTop = objDiv[0].scrollHeight;
-            }
+            scroll();
         });
     </script>
 @endsection

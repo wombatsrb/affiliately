@@ -28,15 +28,25 @@
                             <td>{{$order->email}}</td>
                             <td>{{$order->date_of_order}}</td>
                             <td>{{$order->date_of_update}}</td>
-                            <td>{{$order->order_status_name}}</td>
+                            <td><span
+                                @if($order->order_status_id == 1)
+                                    class="label label-warning"
+                                @endif
+                                @if($order->order_status_id == 2)
+                                    class="label label-success"
+                                @endif
+                                @if($order->order_status_id == 3)
+                                    class="label label-danger"
+                                @endif
+                            >{{$order->order_status_name}}</span></td>
                             <td>
                             @if($order->payment_status==true)
-                                Paid
+                                    <span class="badge badge-success">Paid</span>
                                 @else
-                                Unpaid
+                                    <span class="badge badge-danger">Unpaid</span>
                             @endif
                             </td>
-                            <td><a href='{{route('orderView', ['id' => $order->id_order])}}' ">View Details</a></td>
+                            <td><a class="btn btn-primary" href='{{route('orderView', ['id' => $order->id_order])}}' ">Details</a></td>
                         </tr>
                     @endforeach
                     </tbody>

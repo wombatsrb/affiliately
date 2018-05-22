@@ -42,9 +42,15 @@ class AdminController extends Controller {
         if(session()->has('user')){
             $menuItems = $this->menuInstance->getMenuListByRole(session()->get('user')->role_name);
             $this->data['menus'] = $menuItems;
-                       
+
+            /*getting unread messages for header*/
+            $idWorker = session()->get('user')->id_user;
+            $this->data['unreadMessages'] = $this->othersInstance->getUnreadMessages($idWorker);
+
+            /*getting allocated services for current user*/
+            $this->data['allocatedServices'] = $this->othersInstance->getAllocatedServices($idWorker);
         }
-        
+
         /*getting roles for dropdown menu*/
         $this->data['roles'] = $this->othersInstance->getRoles();
         /*getting statuses for dropdown menu*/
@@ -53,6 +59,10 @@ class AdminController extends Controller {
         $this->data['types'] = $this->othersInstance->getServiceTypes();
         /*getting categories types for dropdown menu*/
         $this->data['categories'] = $this->othersInstance->getCategories();
+        /*getting pending orders*/
+        $this->data['pendingOrders'] = $this->othersInstance->getPendingOrders();
+        /*getting services waiting for allocation*/
+        $this->data['waitingAllocation'] = $this->othersInstance->getWaitingServices();
     }
     
     
